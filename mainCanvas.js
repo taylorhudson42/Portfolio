@@ -3,7 +3,7 @@ w = document.documentElement.clientWidth;
 h = document.documentElement.clientHeight;
 let textPointArr;
 let font;
-let points;
+let points = new Array();
 
 class tPoint {
         constructor(x,y){
@@ -11,13 +11,26 @@ class tPoint {
                 this.vel = createVector(0,0);
                 this.acc = createVector(0,0);
                 this.force = createVector(0,0);
-                this.homePos = createVector(x,y);
+                this.target = createVector(x,y);
         }
-        return() {
-                // desired_velocity = normalize(target - position) * max_velocity
-                // steering = desired_velocity - velocity
-
-                
+        update(){
+                this.pos.add(this.vel);
+                this.vel.add(this.acc);
+        }
+        show(){
+                point(this.pos.x,this.pos.y);
+        }
+        steer(){
+                var seek = this.seek(this.target);
+        }
+        applyForce(f){
+                this.acc.add(f);
+        }
+        seek(target){
+                var desired = p5.Vector.sub(target,this.pos);
+                desired.setMag(this.maxspeed);
+                var steer = p5.Vector.sub(desired,this.vel);
+                return steer;
         }
 }
 
@@ -28,9 +41,8 @@ function preload() {
 function setup(){
         createCanvas(document.documentElement.clientWidth, document.documentElement.clientHeight);
         background(51);
-        // textAlign(CENTER);
-        textPointArr = font.textToPoints("Taylor Hudson", 0, 0, 10 ,{
-                sampleFactor: 5,
+        textPointArr = font.textToPoints("Taylor Hudson", width/4, height/2, 100 ,{
+                sampleFactor: .5,
                 simplifyThreshold: 0
               });
         for (var i = 0; i<textPointArr.length; i++){
@@ -47,14 +59,13 @@ function draw(){
         for (var i = 0; i<textPointArr.length; i++){
                 
                 stroke ("White");
-                var p = textPointArr[i];
-                var d = dist(p.x*10,(p.y*10 +height/4),mouseX,mouseY);
-                if (d < 50){
-                       
-                }else{
-                        point(p.x*10, p.y*10 +height/4);
-                        strokeWeight(1);
-                }
+                var p = createVector(textPointArr[i].x, textPointArr[i].y);
+                var m = createVector(mouseX,mouseY);
+                var d = dist(p.x,p.y,m.x,m.y);
+                // points[i].steer();
+                points[i].update();
+                points[i].show();
+                
                 
 //                p.x * width / bounds.w +
 //         sin(20 * p.y / bounds.h + millis() / 1000) * width / 30,
