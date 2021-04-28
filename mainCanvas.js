@@ -6,14 +6,15 @@ let font;
 let points = new Array();
 
 class tPoint {
-        constructor(x,y){
-                this.pos = createVector(x,y);
+        constructor(x,y,x1,y1,color){
+                this.pos = createVector(x1,y1);
                 this.vel = createVector(0,0);
                 this.acc = createVector(0,0);
                 this.force = createVector(0,0);
                 this.target = createVector(x,y);
                 this.maxspeed = 10;
-                this.maxforce = .5;
+                this.maxforce = .4;
+                this.color = color;
         }
         update(){
                 this.pos.add(this.vel);
@@ -61,7 +62,7 @@ class tPoint {
                 var desired = p5.Vector.sub(target, this.pos);
                 var d = desired.mag();
                 var speed = this.maxspeed;
-                if (d < 1000) {
+                if (d < 100) {
                   speed = map(d, 0, 100, 0, this.maxspeed);
                 }
                 desired.setMag(speed);
@@ -72,30 +73,42 @@ class tPoint {
 }
 
 function preload() {
-  font = loadFont('Inconsolata-Medium.otf');
+  font = loadFont("iAWriterDuospace-Regular.otf");
 }
 
 function setup(){
         createCanvas(document.documentElement.clientWidth, document.documentElement.clientHeight);
         background(2);
-        textPointArr = font.textToPoints("Taylor Hudson's", width/4, height/2, 100 ,{
-                sampleFactor: .5,
+        textPointArr = font.textToPoints("Taylor Hudson", width/4, height/2, 100 ,{
+                sampleFactor: .2,
                 simplifyThreshold: 0
               });
         for (var i = 0; i<textPointArr.length; i++){
-                points[i] = new tPoint(textPointArr[i].x,textPointArr[i].y);
+                points[i] = new tPoint(textPointArr[i].x,
+                        textPointArr[i].y,
+                        textPointArr[i].x + random(-300,300),
+                        textPointArr[i].y+random(-300,300),
+                        color(random(0,255),random(0,255),random(0,255))
+                );
         }
+        button = createButton('click me');
+        button.position(0, 0);
+        button.mousePressed();
+      
+      
+     
         // for (var i = 0; i<textPointArr.length; i++){
         //         // console.log(textPointArr[i].x *bounds.w+ " " + textPointArr[i].y * bounds.h)
         // };
 }
 
 function draw(){
-        background(2);
+        background(0);
         
         for (var i = 0; i<textPointArr.length; i++){
                 
-                stroke ("White");
+                // stroke(random(0,255),random(0,255),random(0,255));
+                stroke(255);
                 points[i].steer();
                 points[i].update();
                 points[i].show();
