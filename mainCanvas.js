@@ -5,8 +5,17 @@ let textPoints;
 let font;
 let points = new Array();
 let bounds;
+let lengths = [];
+
+let links = [
+        "https://github.com/taylorhudson42/SolarSimulation",
+        "https://github.com/Lunatic-Labs/Project-Aim",
+        "https://github.com/taylorhudson42/lu-printing-desktop"
+];
+
+
 class tPoint {
-        constructor(x,y,x1,y1,color){
+        constructor(x,y,x1,y1){
                 this.pos = createVector(x1,y1);
                 this.vel = createVector(0,0);
                 this.acc = createVector(0,0);
@@ -14,7 +23,7 @@ class tPoint {
                 this.target = createVector(x,y);
                 this.maxspeed = 10;
                 this.maxforce = .6;
-                this.color = color;
+                this.color = color(255,255,255);
         }
         update(){
                 this.pos.add(this.vel);
@@ -22,6 +31,7 @@ class tPoint {
                 this.acc.mult(0);
         }
         show(){
+                stroke(this.color);
                 point(this.pos.x,this.pos.y);
         }
         steer(){
@@ -90,7 +100,7 @@ function setup(){
                         textPoints[i].y+((height-bounds.h)/2),
                         textPoints[i].x+((width-bounds.w)/2) + random(-300,300),
                         textPoints[i].y+((height-bounds.h)/2) + random(-300,300),
-                        color(random(0,255),random(0,255),random(0,255))
+                        color(255,255,255)
                 );
         }
         button = createButton('View Projects');
@@ -106,19 +116,19 @@ function setup(){
 function startTransition(){
         textPoints = [];
         let strings = ["Solar Simulation", "Project AIM", "Printing Interface"];
-        let lengths = [];
         let boundsWords = [];
         for (var i = 0; i<strings.length; i++){
                 let word = font.textToPoints(strings[i], 0, 0, 90,{sampleFactor:.3, simplifyThreshold:0});
                 textPoints = textPoints.concat(word);
                 boundsWords[i] = font.textBounds(strings[i],0,0,90);
-                lengths[i] = textPoints.length;
+                lengths[i] = createVector(textPoints.length, textPoints.length-word.length);
+                console.log("Word Lengths: "+ lengths[i].y);
         }
         console.log(textPoints.length);
         console.log(points.length);
         var lnum = 0;
         for (var i = 0; i<textPoints.length; i++){
-                if (i>lengths[lnum]){
+                if (i>lengths[lnum].x){
                         lnum++;
                 }
                 if (i>=points.length){
@@ -126,7 +136,8 @@ function startTransition(){
                                 textPoints[i].x+((width-boundsWords[lnum].w)/2),
                                 textPoints[i].y+((height-boundsWords[lnum].h)/4*(lnum+1)),
                                 points[i-1%points.length].pos.x,
-                                points[i-1%points.length].pos.y
+                                points[i-1%points.length].pos.y,
+                                color(255,255,255)
                         );
                 }else{
                         // console.log(i);
@@ -143,27 +154,27 @@ function startTransition(){
 
 async function makeButtons(bounds){
         await new Promise(r => setTimeout(r, 2000));
-        let links = [
-                "https://github.com/taylorhudson42/SolarSimulation",
-                "https://github.com/Lunatic-Labs/Project-Aim",
-                "https://github.com/taylorhudson42/lu-printing-desktop"
-        ];
         console.log(links[0]);
         for (var i = 0; i <links.length; i++){
                 solarDiv = createButton();
                 console.log(bounds[i].h);
                 solarDiv.position(bounds[i].x,(height-bounds[i].h)/4*(i) + 30);
                 solarDiv.style("width:100%; opacity:0;height:25%");
-                // solarSim = createButton("Explore Project");
-                // solarSim.class("btn btn-dark");
-                // solarDiv.child(solarSim);
-                // solarSim.center();
-                solarDiv.hover
+                solarDiv.id(i);
+                solarDiv.mouseOver(function(){
+                        changeColor(this.id(), color(86,246,250));
+                });
+                solarDiv.mouseOut(function(){
+                        changeColor(this.id(), color(255,255,255));
+                })
                 solarDiv.attribute("onclick","window.open(\""+links[i]+"\",'_blank', 'resizable=yes')");
         }
-        
+}
 
-
+function changeColor(id, color){
+        for (var i = lengths[id].y; i < lengths[id].x; i++){
+                points[i].color = color;
+        }
 }
 
 function draw(){
@@ -173,7 +184,7 @@ function draw(){
                 
                 // stroke(random(0,255),random(0,255),random(0,255));
                 // stroke(255,map(-dist(points[i].pos.x,points[i].pos.y, mouseX,mouseY),-width, 0, 0,255));
-                stroke(255);
+                // stroke(255);
                 points[i].steer();
                 points[i].update();
                 points[i].show();                
