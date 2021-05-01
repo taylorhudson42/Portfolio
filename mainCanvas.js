@@ -5,8 +5,9 @@ let textPoints;
 let font;
 let points = new Array();
 let bounds;
+var fleeBool = true;
+var drawText = false;
 let lengths = [];
-
 let links = [
         "https://github.com/taylorhudson42/SolarSimulation",
         "https://github.com/Lunatic-Labs/Project-Aim",
@@ -43,7 +44,9 @@ class tPoint {
                 flee.mult(5);
 
                 this.applyForce(arrive);
-                this.applyForce(flee);
+                if (fleeBool){
+                        this.applyForce(flee);
+                }
 
         }
         applyForce(f){
@@ -87,8 +90,9 @@ function preload() {
 }
 
 function setup(){
-        createCanvas(document.documentElement.clientWidth, document.documentElement.clientHeight);
+        createCanvas(document.documentElement.clientWidth, document.documentElement.clientHeight*.95);
         background(2);
+        strokeWeight(3);
         textPoints = font.textToPoints("Taylor Hudson", 0, 0, 100 ,{
                 sampleFactor: .3,
                 simplifyThreshold: 0
@@ -105,6 +109,8 @@ function setup(){
         }
         button = createButton('View Projects');
         button.center();
+        button.position(AUTO, ((height-bounds.h)/2) + 20);
+
         button.mousePressed(function(){
                 startTransition();
                 this.remove();
@@ -113,7 +119,8 @@ function setup(){
       
 }
 
-function startTransition(){
+async function startTransition(){
+        fleeBool = false;
         textPoints = [];
         let strings = ["Solar Simulation", "Project AIM", "Printing Interface"];
         let boundsWords = [];
@@ -126,34 +133,36 @@ function startTransition(){
         }
         console.log(textPoints.length);
         console.log(points.length);
+        // for (var i = 0; i<points.length; i++){
+        //         points[i].target = createVector(mouseX,mouseY);
+        // }
+
+        // await new Promise(r => setTimeout(r, 1000));
+        
         var lnum = 0;
+        var a = points.length;
+
         for (var i = 0; i<textPoints.length; i++){
                 if (i>lengths[lnum].x){
                         lnum++;
                 }
-                if (i>=points.length){
-                        points[i] = new tPoint(
-                                textPoints[i].x+((width-boundsWords[lnum].w)/2),
-                                textPoints[i].y+((height-boundsWords[lnum].h)/4*(lnum+1)),
-                                points[i-1%points.length].pos.x,
-                                points[i-1%points.length].pos.y,
-                                color(255,255,255)
-                        );
-                }else{
-                        // console.log(i);
-                        points[i].target = createVector(
-                                textPoints[i].x+((width-boundsWords[lnum].w)/2),
-                                textPoints[i].y+((height-boundsWords[lnum].h)/4*(lnum+1))
-                        );
-                }
-                // console.log(points[i%points.length]);
+                points[i] = new tPoint(
+                        textPoints[i].x+((width-boundsWords[lnum].w)/2),
+                        textPoints[i].y+((height-boundsWords[lnum].h)/4*(lnum+1)),
+                        points[i%a].pos.x,
+                        points[i%a].pos.y,
+                        color(255,255,255)
+                );
         }
-        
+        // fleeBool = true;
+      
         makeButtons(boundsWords);
+        await new Promise(r => setTimeout(r, 1000));
+        drawText = true;
 }
 
 async function makeButtons(bounds){
-        await new Promise(r => setTimeout(r, 2000));
+        await new Promise(r => setTimeout(r, 1000));
         console.log(links[0]);
         for (var i = 0; i <links.length; i++){
                 solarDiv = createButton();
@@ -179,15 +188,25 @@ function changeColor(id, color){
 
 function draw(){
         background(0);
-        
         for (var i = 0; i<points.length; i++){
-                
-                // stroke(random(0,255),random(0,255),random(0,255));
-                // stroke(255,map(-dist(points[i].pos.x,points[i].pos.y, mouseX,mouseY),-width, 0, 0,255));
-                // stroke(255);
                 points[i].steer();
                 points[i].update();
                 points[i].show();                
        };
-
+       let strings = ["Solar Simulation", "Project AIM", "Printing Interface"];
+       let boundsWords = [];
+        for (var i = 0; i<strings.length; i++){
+                boundsWords[i] = font.textBounds(strings[i],0,0,90);
+        }
+       if (drawText == true) {
+        //        console.log("?Test);");
+                stroke(255);
+                fill(255);
+                textSize(90);
+                textFont(font);
+                text(strings[0], ((width-boundsWords[0].w)/2), (height-boundsWords[0].h)/4*(0+1));
+                text(strings[1], ((width-boundsWords[1].w)/2), (height-boundsWords[1].h)/4*(1+1));
+                text(strings[2], ((width-boundsWords[2].w)/2), (height-boundsWords[2].h)/4*(2+1));
+        }
+        
 }
