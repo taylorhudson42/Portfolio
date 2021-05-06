@@ -20,7 +20,7 @@
 
     <style>
         body {
-            background-color: rgb(51, 51, 51);
+            background-color: black;
         }
         
         .bl {
@@ -30,7 +30,7 @@
         }
         
         .gr {
-            color: grey;
+            color: lightgrey;
             font-size: 2em;
         }
         
@@ -49,16 +49,50 @@
             height: 5vh;
             width: 100vw;
         }
+        
+        #projects {
+            color: rgb(85, 230, 250);
+            position: relative;
+            display: block;
+            left: 20vw;
+            top: AUTO;
+        }
+        
+        h2 {
+            color: lightgray;
+        }
     </style>
 </head>
 
 <body style="margin: 0; height:200vh">
-    <div id="nav"></div>
     <!--[if lt IE 7]>
                         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
                 <![endif]-->
 
     <script src="" async defer></script>
+    <div id="mainContainer">
+        <div id="canvContainer"></div>
+        <div id="infoContainer" style="display: block;"></div>
+        <div id="projects">
+            <h1>
+                Projects
+            </h1>
+            <div class="proj">
+                <h2>Solar Simulation</h2>
+                <p>This is a personal project built from my interest in space and the solar system. I used the p5.js Libarry</p>
+            </div>
+            <div class="proj">
+                <h2>Lipscomb Print</h2>
+            </div>
+            <div class="proj">
+                <h2>Project AIM</h2>
+            </div>
+
+
+
+        </div>
+    </div>
+
 
 </body>
 

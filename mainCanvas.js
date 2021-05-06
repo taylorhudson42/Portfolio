@@ -10,6 +10,7 @@ var drawText = false;
 let lengths = [];
 var light, dark;
 var oneTimeOnly = false;
+var canv;
 light = 255;
 dark = 10;
 let links = [
@@ -106,7 +107,8 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(document.documentElement.clientWidth, document.documentElement.clientHeight);
+    canv = createCanvas(document.documentElement.clientWidth, document.documentElement.clientHeight);
+    canv.parent('canvContainer');
     background(dark);
     strokeWeight(3);
 
@@ -143,17 +145,26 @@ function setup() {
         <span class="bl">useful</span>
         <span class="gr">projects.</span>
         <br>
-        <span class="grSub">I have experience working with front-end as well as back-end applications. I've worked with JavaScript, Python, Java, C++, C, Ruby, and Swift.</span> 
+        <span class="grSub">I have experience working with front-end as well as back-end applications. I've worked with JavaScript, Python, Java, C++, C, Ruby, and Swift.</span>
+        <br><br>
+        <span class="gr">About </span>
+        <span class="bl">Me</span>
+        <br>
+        <span class="grSub">I grew up in Cincinnati, Ohio where I quickly became fond of computing. I enjoy developing personally interesting projects and discussing the capabilities of advanced computing. I spend most my time exercising, reading, and enjoying time with friends and family.</span>
     `;
     introDiv = createDiv(html);
+    introDiv.parent('infoContainer');
     introDiv.position(width * .2, height * .3);
-    introDiv.style("width", "60%");
+    introDiv.style("left", "20vw");
+    introDiv.style("top", "30vh");
+    introDiv.style("width", "60vw");
     introDiv.attribute("display", "block");
     introDiv.style("max-height", "70vh");
+    introDiv.attribute("clear", "both");
+    introDiv.style("overflow", "-moz-scrollbars-vertical");
     introDiv.style("overflow", "scroll");
+
     introSmall = createDiv();
-
-
 }
 
 function windowResized() {
