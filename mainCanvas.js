@@ -8,11 +8,13 @@ let bounds;
 var fleeBool = true;
 var drawText = false;
 let lengths = [];
-var light, dark;
+var themeval;
 var oneTimeOnly = false;
 var canv;
-light = 255;
-dark = 10;
+var dark = true;
+var pointThemeVal;
+var lightDark;
+themeval = 0;
 let links = [
     "https://github.com/taylorhudson42/SolarSimulation",
     "https://github.com/Lunatic-Labs/Project-Aim",
@@ -37,7 +39,7 @@ class tPoint {
         this.acc.mult(0);
     }
     show() {
-        stroke(this.color);
+        stroke(pointThemeVal);
         point(this.pos.x, this.pos.y);
     }
     steer() {
@@ -107,9 +109,10 @@ function preload() {
 }
 
 function setup() {
+    pointThemeVal = color(85, 230, 255);
     canv = createCanvas(document.documentElement.clientWidth, document.documentElement.clientHeight);
     canv.parent('canvContainer');
-    background(dark);
+    background(themeval);
     strokeWeight(3);
 
 
@@ -125,13 +128,12 @@ function setup() {
             textPoints[i].y + ((height - bounds.h) * .2),
             textPoints[i].x + ((width - bounds.w) / 2) + i * random(0, .3), // + random(-300, 300),
             textPoints[i].y + ((height - bounds.h) / 2) - (500),
-            color(85, 230, 250)
+            pointThemeVal
         );
     }
     var html = `
         <span class="gr"> I'm an aspiring</span>
-        <span class="bl">software engineer</span>
-        <span class="gr">.</span>
+        <span class="bl">software engineer</span><span class="gr">.</span>
 
         <br>
         <span class="grSub">I review, develop, and test code. I am a sophomore at</span>
@@ -154,34 +156,90 @@ function setup() {
     `;
     introDiv = createDiv(html);
     introDiv.parent('infoContainer');
+    introDiv.id("info");
     introDiv.position(width * .2, height * .3);
     introDiv.style("left", "20vw");
     introDiv.style("top", "30vh");
     introDiv.style("width", "60vw");
     introDiv.attribute("display", "block");
-    introDiv.style("max-height", "70vh");
+    // introDiv.style("max-height", "70vh");
     introDiv.attribute("clear", "both");
     introDiv.style("overflow", "-moz-scrollbars-vertical");
     introDiv.style("overflow", "scroll");
 
-    introSmall = createDiv();
+    lightDark = createButton();
+    var buttonHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-brightness-high-fill" viewBox="0 0 16 16">
+    <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+  </svg>`
+        // lightDark.style("background", "black");
+        // lightDark.style("border", "none");
+    lightDark.class("btn btn-dark");
+    lightDark.html(buttonHTML)
+    lightDark.position(width * .1, height * .1);
+    lightDark.mousePressed(changeTheme);
+    lightDark.style('height', '45px');
+    lightDark.style('width', '45px');
+    // lightDark.style("text-align", "middle");
+}
+
+function changeTheme() {
+    var r = document.querySelector(':root');
+    if (dark == true) {
+        r.style.setProperty("--background", "white");
+        r.style.setProperty("--EmphText", "#C001FF");
+        r.style.setProperty("--notEmphText", "#515151");
+        r.style.setProperty("--subtext", "#8A8A8A");
+        dark = false;
+        themeval = 255;
+        pointThemeVal = color('#C001FF');
+        var buttonHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-moon-fill" viewBox="0 0 16 16">
+        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+      </svg>`
+        lightDark.html(buttonHTML);
+        lightDark.class("btn btn-outline-dark");
+        // lightDark.style("background", "white");
+    } else {
+        r.style.setProperty("--background", "black");
+        r.style.setProperty("--EmphText", "rgb(85, 230, 250)");
+        r.style.setProperty("--notEmphText", "lightgrey");
+        r.style.setProperty("--subtext", "grey");
+        dark = true;
+        themeval = 0;
+        pointThemeVal = color(85, 230, 255);
+        var buttonHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-brightness-high-fill" viewBox="0 0 16 16">
+        <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+      </svg>`
+        lightDark.html(buttonHTML);
+        lightDark.class("btn btn-dark");
+        // lightDark.style("background", "black");
+
+    }
 }
 
 function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
+    var infoDivHeight = document.getElementById('info').clientHeight;
+    if (windowHeight < (windowHeight * .3) + infoDivHeight) {
+        hei = (windowHeight * .3) + infoDivHeight;
+    } else {
+        hei = windowHeight;
+    }
+    resizeCanvas(windowWidth, hei);
     width = document.documentElement.clientWidth;
     height = document.documentElement.clientHeight;
+    drawPoints();
 
 }
 
 function draw() {
-    background(0);
+    background(themeval);
     for (var i = 0; i < points.length; i++) {
         points[i].steer();
         points[i].update();
         points[i].show();
     }
     var y = window.scrollY;
+
+    // Transition on Scroll
     if (y > height * .1 && y < height) {
         oneTimeOnly = true;
         var interval = int(map(y, 0, h / 2, 0, points.length, true));
@@ -219,19 +277,38 @@ function draw() {
                 s = 0;
             }
 
-            points[i].target = createVector(((width * .001) + s) * 20 + alt + alt2, height * .3 + t * 10);
+            points[i].target = createVector(((width * .001) + s) * 20 + alt + alt2, t * 10);
             s++
         }
     }
     if (y < height * .1 && oneTimeOnly == true) {
         oneTimeOnly = false;
-        textPoints = font.textToPoints("Taylor Hudson", 0, 0, width / 12, {
-            sampleFactor: .5,
-            simplifyThreshold: 0
-        });
-        bounds = font.textBounds("Taylor Hudson", 0, 0, width / 12, { textalign: CENTER });
-        for (var i = 0; i < points.length; i++) {
+        drawPoints();
+    }
+}
+
+function drawPoints() {
+    textPoints = font.textToPoints("Taylor Hudson", 0, 0, width / 12, {
+        sampleFactor: .5,
+        simplifyThreshold: 0
+    });
+    bounds = font.textBounds("Taylor Hudson", 0, 0, width / 12, { textalign: CENTER });
+    var j = 0;
+    for (var i = 0; i < textPoints.length; i++) {
+        if (i > points.length || points[i] == null) {
+            points[i] = new tPoint(
+                textPoints[i].x + ((width - bounds.w) / 2),
+                textPoints[i].y + ((height - bounds.h) * .2),
+                textPoints[i].x + ((width - bounds.w) / 2) + i * random(0, .3), // + random(-300, 300),
+                textPoints[i].y + ((height - bounds.h) / 2) - (500),
+                pointThemeVal
+            );
+        } else {
             points[i].target = createVector(textPoints[i].x + ((width - bounds.w) / 2), textPoints[i].y + ((height - bounds.h) * .2));
         }
+        j++;
+    }
+    if (j < points.length) {
+        points = points.slice(0, j);
     }
 }
