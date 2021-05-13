@@ -77,6 +77,20 @@
             border-bottom: 3px solid;
             border-color: var(--EmphText);
         }
+        
+        .github {
+            display: inline;
+            margin: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .links {
+            padding: 10px;
+        }
+        
+        .card-body {
+            color: var(--notEmphText);
+        }
     </style>
 </head>
 
@@ -106,57 +120,153 @@
                     </div>
 
                     <div id="collapseOne" class="collapse show" aria-labelledby="projectOne" data-parent="#projectAccordion">
-                        <div class="card-body" style="color:var(--notEmphText)">
-                            This is a personal project built from my interest in space and the solar system. It was intended to be a interactive web-based program to absorb a basic understanding of the solar system while still providing an entertaining objective. Using object-oriented
-                            programming, I added the planets and stars into the universe, giving them unique mass and velocities for orbital trajectories. This was displayed using the p5.js library. </div>
-                        <div class="github" style="margin:10px">
-                            <button class="btn btn-secondary">View on Github  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></button>
+                        <div class="card-body">
+                            <div id="solarSys" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#solarSys" data-slide-to="0" class="active"></li>
+                                    <li data-target="#solarSys" data-slide-to="1"></li>
+                                    <li data-target="#solarSys" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img class="d-block w-75 mx-auto" style="border:solid;border-color:var(--EmphText)" src="res/solarSim/1.png" alt="First slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-75 mx-auto" style="border:solid;border-color:var(--EmphText)" src="res/solarSim/2.png" alt="Second slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-75 mx-auto" style="border:solid;border-color:var(--EmphText)" src="res/solarSim/3.png" alt="Third slide">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#solarSys" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#solarSys" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                            <div style="width:60%">
+                                This is a personal project built from my interest in space and the solar system. It was intended to be a interactive web-based program to absorb a basic understanding of the solar system while still providing an entertaining objective. Using object-oriented
+                                programming, I added the planets and stars into the universe, giving them unique mass and velocities for orbital trajectories. This was displayed using the p5.js library.
+                            </div>
+                            <div class="links">
+                                <div class="github">
+                                    <a href="https://github.com/taylorhudson42/SolarSimulation" class="btn btn-secondary">View on Github  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                                </div>
+                                <div class="github">
+                                    <a class="btn btn-secondary" href="https://taylorhudson42.github.io/SolarSimulation/">View project  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M23.948.042c-.413-.028-.817-.042-1.214-.042-8.6 0-13.497 6.557-15.278 11.833l4.727 4.727c5.428-1.944 11.817-6.66 11.817-15.168 0-.44-.017-.89-.052-1.35zm-11.277 14.178l-2.883-2.883c1.221-2.859 4.691-8.945 12.199-9.32-.251 5.775-4.041 9.932-9.316 12.203zm5.471 1.538c-.547.373-1.09.71-1.628 1.011-.187.891-.662 1.842-1.351 2.652-.002-.576-.162-1.156-.443-1.738-.495.225-.966.418-1.414.588.66 1.709-.012 2.971-.915 4.154 1.296-.098 2.656-.732 3.728-1.805 1.155-1.155 1.967-2.823 2.023-4.862zm-11.82-6.469c-.579-.28-1.158-.438-1.732-.441.803-.681 1.744-1.153 2.626-1.345.314-.552.667-1.097 1.039-1.633-2.039.055-3.708.867-4.864 2.023-1.071 1.071-1.706 2.433-1.804 3.728 1.184-.904 2.446-1.576 4.155-.914.173-.471.366-.944.58-1.418zm7.738.663c-.391-.391-.391-1.023 0-1.414s1.023-.391 1.414 0c.391.392.391 1.024 0 1.415s-1.024.39-1.414-.001zm4.949-4.951c-.78-.78-2.047-.78-2.828 0-.781.781-.781 2.049 0 2.829.781.781 2.048.781 2.829 0 .78-.78.78-2.047-.001-2.829zm-1.908 1.911c-.273-.273-.273-.718 0-.99.271-.273.717-.273.99 0 .272.272.271.717 0 .99-.274.272-.718.272-.99 0zm-6.747 10.65c-1.492 3.81-5.803 6.208-10.354 6.438.219-4.289 2.657-8.676 6.64-10.153l.805.806c-4.331 2.755-4.653 5.346-4.665 6.575 1.268-.015 4.054-.344 6.778-4.464l.796.798z"/></svg></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card bg-dark">
-                    <div class="card-header" id="projectTwo">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color:var(--notEmphText); font-size:1em">
+                    <div class="card bg-dark">
+                        <div class="card-header" id="projectTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color:var(--notEmphText); font-size:1em">
                                 Lipscomb Printing Service
                       </button>
-                        </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="projectTwo" data-parent="#projectAccordion">
-                        <div class="card-body" style="color:var(--notEmphText)">
-                            After seeing the web-interface and a lack of mobile integration for the printing application on campus, I and a team of User-Interface design classmates decided to create a mobile interface and redesign the web-application. This project used HTML, JavaScript
-                            and CSS for the web-interface, and an online tool called Figma to design the mobile interface. This was meant to be exclusively a design project, so there is not functionality on these interfaces yet. </div>
-                        <div class="github" style="margin:10px">
-                            <button class="btn btn-secondary">View on Github  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></button>
+                            </h5>
                         </div>
-                    </div>
-                </div>
-                <div class="card bg-dark">
-                    <div class="card-header" id="projectThree">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="color:var(--notEmphText); font-size:1em">
+                        <div id="collapseTwo" class="collapse" aria-labelledby="projectTwo" data-parent="#projectAccordion">
+                            <div class="card-body">
+                                <div id="printing" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#printing" data-slide-to="0" class="active"></li>
+                                        <li data-target="#printing" data-slide-to="1"></li>
+                                        <li data-target="#printing" data-slide-to="2"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-75 mx-auto" style="border:solid;border-color:var(--EmphText)" src="res/printing/1.png" alt="First slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-75 mx-auto" style="border:solid;border-color:var(--EmphText)" src="res/printing/2.png" alt="Second slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-75 mx-auto" style="border:solid;border-color:var(--EmphText)" src="res/printing/3.png" alt="Third slide">
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#printing" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#printing" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                                <div style="width:60%; margin-left:10px; padding-left:10px">
+                                    After seeing the web-interface and a lack of mobile integration for the printing application on campus, I and a team of User-Interface design classmates decided to create a mobile interface and redesign the web-application. This project used HTML, JavaScript
+                                    and CSS for the web-interface, and an online tool called Figma to design the mobile interface. This was meant to be exclusively a design project, so there is not functionality on these interfaces yet.
+                                </div>
+                                <div class="links">
+                                    <div class="github">
+                                        <a class="btn btn-secondary" href="https://www.figma.com/proto/n6d2ClKGWYhxevBFpMOsUb/Print-Mobile-App?node-id=232%3A22195&scaling=scale-down&page-id=232%3A22194">View on Figma <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.997 13.985c.01 1.104-.88 2.008-1.986 2.015-1.105.009-2.005-.88-2.011-1.984-.01-1.105.879-2.005 1.982-2.016 1.106-.007 2.009.883 2.015 1.985zm-.978-3.986c-1.104.008-2.008-.88-2.015-1.987-.009-1.103.877-2.004 1.984-2.011 1.102-.01 2.008.877 2.012 1.982.012 1.107-.88 2.006-1.981 2.016zm7.981-4.014c.004 1.102-.881 2.008-1.985 2.015-1.106.01-2.008-.879-2.015-1.983-.011-1.106.878-2.006 1.985-2.015 1.101-.006 2.005.881 2.015 1.983zm-12 15.847c4.587.38 2.944-4.492 7.188-4.537l1.838 1.534c.458 5.537-6.315 6.772-9.026 3.003zm14.065-7.115c1.427-2.239 5.846-9.748 5.846-9.748.353-.623-.429-1.273-.975-.813 0 0-6.572 5.714-8.511 7.525-1.532 1.432-1.539 2.086-2.035 4.447l1.68 1.4c2.227-.915 2.868-1.04 3.995-2.811zm-12.622 4.806c-2.084-1.82-3.42-4.479-3.443-7.447-.044-5.51 4.406-10.03 9.92-10.075 3.838-.021 6.479 1.905 6.496 3.447l1.663-1.456c-1.01-2.223-4.182-4.045-8.176-3.992-6.623.055-11.955 5.466-11.903 12.092.023 2.912 1.083 5.57 2.823 7.635.958.492 2.123.329 2.62-.204zm12.797-1.906c1.059 1.97-1.351 3.37-3.545 3.992-.304.912-.803 1.721-1.374 2.311 5.255-.591 9.061-4.304 6.266-7.889-.459.685-.897 1.197-1.347 1.586z"/></svg></a>
+                                    </div>
+                                    <div class="github">
+                                        <a class="btn btn-secondary" href="https://github.com/bboyd01/lu-printing-desktop">View Github <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                                    </div>
+                                    <div class="github">
+                                        <a class="btn btn-secondary" href="https://bboyd01.github.io/lu-printing-desktop/">View GitHub Pages <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card bg-dark">
+                            <div class="card-header" id="projectThree">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="color:var(--notEmphText); font-size:1em">
                                 Project AIM
                       </button>
-                        </h5>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="projectThree" data-parent="#projectAccordion">
-                        <div class="card-body" style="color:var(--notEmphText)">
-                            The 'AIM' in Project AIM stands for "Artificial Intelligence Manager". This project is an attempt to make an automatic podcast manager, which switches cameras based on who is talking. This was a team project, in a class that was meant to simulate a working
-                            environment with customers, employees and executives. The AI part of this project currently is a facial landmark detection system in which finds the positions of a podcaster's mouth, and detects if they are speaking or not
-                            based on the change of the lip positions. This, in combination with a algorithmic audio level reflex-agent makes decisions based on two 'confidence variables' that are calculated by the systems described earlier. This is a
-                            work in progress.
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="projectThree" data-parent="#projectAccordion">
+                                <div class="card-body">
+                                    <div id="projAIM" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <img class="d-block w-75 mx-auto" style="border:solid;border-color:var(--EmphText)" src="res/printing/1.png" alt="First slide">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img class="d-block w-75 mx-auto" style="border:solid;border-color:var(--EmphText)" src="res/printing/2.png" alt="Second slide">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img class="d-block w-75 mx-auto" style="border:solid;border-color:var(--EmphText)" src="res/printing/3.png" alt="Third slide">
+                                            </div>
+                                        </div>
+                                        <a class="carousel-control-prev" href="#projAIM" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#projAIM" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                    <div style="width:60%">
+                                        The 'AIM' in Project AIM stands for "Artificial Intelligence Manager". This project is an attempt to make an automatic podcast manager, which switches cameras based on who is talking. This was a team project, in a class that was meant to simulate a working
+                                        environment with customers, employees and executives. The AI part of this project currently is a facial landmark detection system in which finds the positions of a podcaster's mouth, and detects if they are speaking
+                                        or not based on the change of the lip positions. This, in combination with a algorithmic audio level reflex-agent makes decisions based on two 'confidence variables' that are calculated by the systems described
+                                        earlier. This is a work in progress.
+                                    </div>
+                                </div>
+                                <div class="links">
+                                    <div class="github">
+                                        <button class="btn btn-secondary">View on Github  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></button>
+                                    </div>
+                                </div>
+
+
+                            </div>
                         </div>
-                        <div class="github" style="margin:10px">
-                            <button class="btn btn-secondary">View on Github  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></button>
-                        </div>
                     </div>
+
+
+
                 </div>
             </div>
-
-
-
-        </div>
-    </div>
 
 
 </body>

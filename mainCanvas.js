@@ -137,8 +137,7 @@ function setup() {
 
         <br>
         <span class="grSub">I review, develop, and test code. I am a sophomore at</span>
-        <a id=\"schoollink\" href=\"https://www.lipscomb.edu\">Lipscomb University</a>
-        <span class="grSub">, studying software engineering.</span>
+        <a id=\"schoollink\" href=\"https://www.lipscomb.edu\">Lipscomb University</a><span class="grSub">, studying software engineering.</span>
         <br>
         <br>
         <span class="gr">I want to make</span>
@@ -193,6 +192,11 @@ function changeTheme() {
       </svg>`
         lightDark.html(buttonHTML);
         lightDark.class("btn btn-outline-dark");
+        var cards = document.getElementsByClassName("card");
+        for (var i = 0; i < cards.length; i++) {
+            cards[i].classList.remove("bg-dark");
+            cards[i].classList.add("bg-light");
+        }
     } else {
         r.style.setProperty("--background", "black");
         r.style.setProperty("--EmphText", "rgb(85, 230, 250)");
@@ -206,6 +210,11 @@ function changeTheme() {
       </svg>`
         lightDark.html(buttonHTML);
         lightDark.class("btn btn-dark");
+        var cards = document.getElementsByClassName("card");
+        for (var i = 0; i < cards.length; i++) {
+            cards[i].classList.remove("bg-light");
+            cards[i].classList.add("bg-dark");
+        }
 
     }
 }
