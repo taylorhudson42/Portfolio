@@ -137,8 +137,7 @@ function setup() {
 
         <br>
         <span class="grSub">I review, develop, and test code. I am a sophomore at</span>
-        <a id=\"schoollink\" href=\"https://www.lipscomb.edu\">Lipscomb University</a>
-        <span class="grSub">, studying software engineering.</span>
+        <a id=\"schoollink\" href=\"https://www.lipscomb.edu\">Lipscomb University</a><span class="grSub">, studying software engineering.</span>
         <br>
         <br>
         <span class="gr">I want to make</span>
@@ -162,7 +161,6 @@ function setup() {
     introDiv.style("top", "30vh");
     introDiv.style("width", "60vw");
     introDiv.attribute("display", "block");
-    // introDiv.style("max-height", "70vh");
     introDiv.attribute("clear", "both");
     introDiv.style("overflow", "-moz-scrollbars-vertical");
     introDiv.style("overflow", "scroll");
@@ -171,15 +169,13 @@ function setup() {
     var buttonHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-brightness-high-fill" viewBox="0 0 16 16">
     <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
   </svg>`
-        // lightDark.style("background", "black");
-        // lightDark.style("border", "none");
+
     lightDark.class("btn btn-dark");
     lightDark.html(buttonHTML)
     lightDark.position(width * .1, height * .1);
     lightDark.mousePressed(changeTheme);
     lightDark.style('height', '45px');
     lightDark.style('width', '45px');
-    // lightDark.style("text-align", "middle");
 }
 
 function changeTheme() {
@@ -189,29 +185,55 @@ function changeTheme() {
         r.style.setProperty("--EmphText", "#C001FF");
         r.style.setProperty("--notEmphText", "#515151");
         r.style.setProperty("--subtext", "#8A8A8A");
+        r.style.setProperty("--oppositeBackground", "black")
         dark = false;
         themeval = 255;
         pointThemeVal = color('#C001FF');
         var buttonHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-moon-fill" viewBox="0 0 16 16">
         <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
       </svg>`
-        lightDark.html(buttonHTML);
-        lightDark.class("btn btn-outline-dark");
-        // lightDark.style("background", "white");
+        var btns = document.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            if (!btns[i].classList.contains("btn-dark")) {
+
+                btns[i].classList.remove("btn-outline-light");
+                btns[i].classList.add("btn-outline-dark");
+            }
+        }
+        var cards = document.getElementsByClassName("card");
+        for (var i = 0; i < cards.length; i++) {
+            cards[i].classList.remove("bg-secondary");
+            cards[i].classList.add("bg-light");
+            cards[i].setAttribute('style', "background-color: white !important");
+        }
     } else {
         r.style.setProperty("--background", "black");
         r.style.setProperty("--EmphText", "rgb(85, 230, 250)");
         r.style.setProperty("--notEmphText", "lightgrey");
         r.style.setProperty("--subtext", "grey");
+        r.style.setProperty("--oppositeBackground", "white")
+
         dark = true;
         themeval = 0;
         pointThemeVal = color(85, 230, 255);
         var buttonHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-brightness-high-fill" viewBox="0 0 16 16">
         <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
       </svg>`
-        lightDark.html(buttonHTML);
-        lightDark.class("btn btn-dark");
-        // lightDark.style("background", "black");
+        var btns = document.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            if (!btns[i].classList.contains("btn-dark")) {
+                btns[i].classList.remove("btn-outline-dark");
+                btns[i].classList.add("btn-outline-light");
+            }
+
+        }
+        var cards = document.getElementsByClassName("card");
+        for (var i = 0; i < cards.length; i++) {
+            cards[i].classList.remove("bg-light");
+            cards[i].classList.add("bg-secondary");
+            cards[i].setAttribute('style', "background-color: var(--subtext) !important");
+
+        }
 
     }
 }
