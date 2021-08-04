@@ -39,6 +39,7 @@ class tPoint {
         this.acc.mult(0);
     }
     show() {
+        // console.log((dist(this.pos.x, this.pos.y, this.target.x, this.target.y)));
         stroke(pointThemeVal);
         point(this.pos.x, this.pos.y);
     }
@@ -136,7 +137,7 @@ function setup() {
         <span class="bl">software engineer</span><span class="gr">.</span>
 
         <br>
-        <span class="grSub">I review, develop, and test code. I am a sophomore at</span>
+        <span class="grSub">I review, develop, and test code. I am a junior at</span>
         <a id=\"schoollink\" href=\"https://www.lipscomb.edu\">Lipscomb University</a><span class="grSub">, studying software engineering.</span>
         <br>
         <br>
@@ -176,6 +177,8 @@ function setup() {
     lightDark.mousePressed(changeTheme);
     lightDark.style('height', '45px');
     lightDark.style('width', '45px');
+
+    windowResize();
 }
 
 function changeTheme() {
@@ -238,7 +241,16 @@ function changeTheme() {
     }
 }
 
-function windowResized() {
+var resizedFinished;
+$(window).resize(function() {
+
+    clearTimeout(resizedFinished);
+    resizedFinished = setTimeout(windowResize, 100);
+})
+
+
+function windowResize() {
+    console.log("window Resized");
     var infoDivHeight = document.getElementById('info').clientHeight;
     if (windowHeight < (windowHeight * .3) + infoDivHeight) {
         hei = (windowHeight * .3) + infoDivHeight;
@@ -261,27 +273,18 @@ function draw() {
     }
     var y = window.scrollY;
 
+
     // Transition on Scroll
     if (y > height * .1 && y < height) {
         oneTimeOnly = true;
-        var interval = int(map(y, 0, h / 2, 0, points.length, true));
-        // var alt = true;
-        // for (var i = 0; i < interval; i++) {
-        //     if (alt == true) {
-        //         points[i].target = createVector(width * .175, int(map(i, 0, points.length, height * .3, height)));
-        //         alt = false;
-        //     } else {
-        //         points[i].target = createVector(width * .825, int(map(i, 0, points.length, height * .3, height)));
-        //         alt = true;
-        //     }
-
-        // }
         var s = 0;
         var alt = 0;
         var alt2 = 0;
         var t = 0;
         var oneTime = true;
         for (var i = 0; i < points.length; i++) {
+
+            // Left Side
             if (((width * .001) + s) * 20 + alt > width * .175) {
                 s = 0;
                 t++;
@@ -292,12 +295,26 @@ function draw() {
                 }
             }
 
+            // Right Size
             if (i > points.length / 2 && oneTime == true) {
                 alt2 = width * .8;
                 t = 0;
                 oneTime = false;
                 s = 0;
             }
+
+
+            //Down the middle
+            //Down the middle
+            // if (((width * .2)) + (s * 20) + alt > width * .8) {
+            //     s = 0;
+            //     t++;
+            //     if (alt == 10) {
+            //         alt = 0;
+            //     } else {
+            //         alt = 10;
+            //     }
+            // }
 
             points[i].target = createVector(((width * .001) + s) * 20 + alt + alt2, t * 10);
             s++
